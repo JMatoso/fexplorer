@@ -1,2 +1,2 @@
 # File Explorer
-Command Line App
+Command line application.
