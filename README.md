@@ -1,2 +1,2 @@
-# fexplorer
+# File Explorer
 Command Line App
