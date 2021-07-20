@@ -8,7 +8,6 @@ namespace fexplorer
         static void Main(string[] args)
         {
             DirectoryService.Initialize();
-            Config.GetUsedCommands();
 
             string cmd = string.Empty;
             
@@ -17,23 +16,27 @@ namespace fexplorer
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.Write($"~{DirectoryService.CurrentDirectory}: ");
                 Console.ForegroundColor = ConsoleColor.White;
+                Console.Write(cmd);
+
+                if(Console.ReadKey(true).Key == ConsoleKey.UpArrow)
+                {
+                    cmd = Explorer.SetCommand();
+                    continue;
+                }
 
                 cmd = Console.ReadLine();
 
-                var keyInfo = new ConsoleKeyInfo();
-                if(keyInfo.Equals(ConsoleKey.UpArrow))
-                {
-                    Console.WriteLine("up");
-                }
-
                 if(cmd.Trim().Equals("exit"))
                 {
+                    Config.LatestCommands.Add(cmd);
                     Config.SaveUsedCommands();
                     break;
                 }
 
                 if(!string.IsNullOrWhiteSpace(cmd))
                     Explorer.Navigate(cmd);
+
+                cmd = string.Empty;
             }
         }
     }

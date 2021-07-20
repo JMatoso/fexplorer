@@ -8,7 +8,11 @@ namespace fexplorer.Services
         public static string CurrentDirectory { get; set; }
         private static DirectoryInfo dirInfo { get; set; }
 
-        public static void Initialize() => CurrentDirectory = Directory.GetCurrentDirectory();
+        public static void Initialize()
+        {
+            CurrentDirectory = Directory.GetCurrentDirectory();
+            Config.GetUsedCommands();
+        }
 
         public static void ChangeDirectory(string path)
         {
@@ -27,17 +31,11 @@ namespace fexplorer.Services
                 string newDir = Path.Combine(CurrentDirectory, path);
 
                 if(Exists(newDir))
-                {
                     CurrentDirectory = newDir;
-                }
                 else if(Exists(path))
-                {
                     CurrentDirectory = path;
-                }
                 else
-                {
                     Explorer.ErrorOnConsole($"Dir '{path}' not found.");
-                }
             }
         }
 

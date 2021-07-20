@@ -5,6 +5,8 @@ namespace fexplorer
 {
     public class Explorer
     {
+        private static int _latestCommand = 0;
+        private static int _count = 0;
         public static void Navigate(string cmd)
         {
             var command = cmd.Split(' ');
@@ -55,6 +57,13 @@ namespace fexplorer
                     ErrorOnConsole($"Command '{mainCommand}' not found.");
                     break;
             }
+        }
+
+        public static string SetCommand()
+        {
+            _count++;
+            _latestCommand = Config.LatestCommands.Count;
+            return Config.LatestCommands[_latestCommand - _count];
         }
 
         public static void ErrorOnConsole(string message)

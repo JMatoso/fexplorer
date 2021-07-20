@@ -11,13 +11,9 @@ namespace fexplorer.Services
                 try
                 {
                     if(string.IsNullOrEmpty(arg))
-                    {
                         System.Diagnostics.Process.Start(process);
-                    }
                     else
-                    {
                         System.Diagnostics.Process.Start(process, arg);
-                    }
                     
                     Console.WriteLine($"\nOpening '{process}'... \n");
                 }
